@@ -1,0 +1,70 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="TWT.master.cs" Inherits="AppWeb.TWT" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team Wild Technology</title>
+    <link href="Contenido/TWTLogo.ico" rel="icon" />
+    <link href="Contenido/CSS/Estilos.css" rel="stylesheet" />
+    <link href="Contenido/CSS/Modal.css" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/ddd3cc0419.js" crossorigin="anonymous"></script>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+        <header class="navbar">
+            <div class="nav">
+                <a href="Default.aspx">
+                    <img src="Contenido/TWTLogo.png" alt="Team Wild Technology" /></a>
+                <button class="menu-button" id="menuButton" runat="server"><i class="fa-solid fa-bars"></i></button>
+            </div>
+            <div class="nav__div" id="menu-mobile">
+                <ul class="nav__ul">
+                    <li class="nav__item"><a href="#">Inicio</a></li>
+                    <li class="nav__item"><a href="#">Acerca de Team Wild</a></li>
+                    <li class="nav__item"><a href="#">Servicios</a></li>
+                    <li class="nav__item"><a href="#">Contacto</a></li>
+                </ul>
+                <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                    <ContentTemplate>
+                        <ul class="nav__buttons">
+                            <%if (Session["usuario"] == null)
+                                {
+                            %>
+                            <li>
+                                <a href="Login.aspx">Iniciar Sesión</a>
+                            </li>
+                            <li>
+                                <a href="Register.aspx">Registrarse</a>
+                            </li>
+                            <%}
+                                else
+                                { %>
+
+                            <li class="btnCerrarSesion">
+                                <asp:LinkButton ID="lnkCerrarSesion" runat="server" OnClick="lnkCerrarSesion_Click">Cerrar Sesión</asp:LinkButton>
+                            </li>
+                            <%}  %>
+                        </ul>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+            </div>
+        </header>
+        <section class="container">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </section>
+    </form>
+    <footer>
+        <asp:Label ID="lblCopy" runat="server" Text="Label"></asp:Label>
+    </footer>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="Contenido/JS/Scripts.js"></script>
+</body>
+</html>

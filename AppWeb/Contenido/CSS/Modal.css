@@ -1,0 +1,152 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@600&display=swap');
+
+.modalLogin {
+    position: fixed;
+    top: 70px;
+    background: #00000099;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    animation: opacity .3s;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+@keyframes showModal {
+    0% {
+        transform: scale(0);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes opacity{
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+
+.userData {
+    animation: showModal .5s;
+    margin-top: 65px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    grid-auto-rows: 1fr;
+    background: #000000d1;
+    width: 100vw;
+    height: 60%;
+}
+
+    .userData div {
+        grid-column: 1/3;
+    }
+
+        .userData div:last-child {
+            grid-row: 5/6;
+        }
+
+.input-box {
+    color: #fff;
+    border-bottom: 1px solid #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+    .input-box label {
+        font-family: Kanit;
+        margin: 10px;
+    }
+
+    .input-box input {
+        background: transparent;
+        outline: none;
+        height: 40px;
+        width: 100%;
+        color: #fff;
+        font-size: 1em;
+        border: none;
+        padding: 0 10px;
+    }
+
+    .input-box > input::placeholder {
+        font-family: Kanit;
+        letter-spacing: 1px;
+        color: #5f5f5f97;
+    }
+
+#txtPass {
+    width: 80%;
+}
+
+.input-box button {
+    width: 17%;
+    height: 40px;
+    font-size: 26px;
+    background: transparent;
+    border: none;
+    color: #fff;
+}
+
+.panelUsuario {
+    padding: 10px;
+    margin: 16px 5px;
+    color: #fff;
+    border: 1px solid #fff;
+    border-radius: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0px 0px 10px;
+}
+
+    .panelUsuario a {
+        font-weight: 600;
+    }
+
+        .panelUsuario a:hover {
+            text-decoration: underline;
+            color: #107d19;
+        }
+
+.modal-footer {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 100%;
+    align-items: center;
+    justify-items: center;
+}
+
+    .modal-footer a:first-child {
+        grid-column: 1/2;
+    }
+
+    .modal-footer a:last-child {
+        grid-column: 2/3;
+    }
+
+    .modal-footer > a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 96%;
+        height: 40%;
+        font-size: 1em;
+        font-weight: 600;
+        border-radius: 50px;
+        border: none;
+    }
