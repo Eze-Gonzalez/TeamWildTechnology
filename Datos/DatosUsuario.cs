@@ -10,81 +10,158 @@ namespace Datos
 {
     public class DatosUsuario
     {
-        public Usuario traerUsuario()
+        public int nuevoUsuario(Usuario usuario)
         {
-				AccesoDatos datos = new AccesoDatos();
-			try
-			{
-				Usuario usuario = new Usuario();
-				datos.consultaSP("tarerUsuario");
-				datos.lectura();
-				if (datos.Lector.Read())
-				{
-					usuario.Id = (int)datos.Lector["Id"];
-					usuario.UserName = (string)datos.Lector["UserName"];
-					usuario.Nombre = (string)datos.Lector["Name"];
-					usuario.Apellido = (string)datos.Lector["LastName"];
-					usuario.Fecha = (DateTime)datos.Lector["BirthDate"];
-					usuario.Email = (string)datos.Lector["Email"];
-					usuario.Pass = (string)datos.Lector["Pass"];
-					usuario.TwoFactor = (bool)datos.Lector["TwoFactor"];
-					usuario.TwoFactorType = (TwoFactorType)datos.Lector["TwoFactorType"];
-					usuario.Premium = (bool)datos.Lector["Premium"];
-				}
-				return usuario;
-			}
-			catch (Exception)
-			{
-
-				throw;
-			}
-			finally
-			{
-				datos.cerrarConexion();
-			}
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.consultaSP("Registro");
+                //@email varchar(100),
+                //@pass varchar(8),
+                //@nombre varchar(50),
+                //@apellido varchar(50),
+                //@fecha datetime
+                datos.parametros("@email", usuario.Email);
+                datos.parametros("@username", usuario.UserName);
+                datos.parametros("@pass", usuario.Pass);
+                datos.parametros("@nombre", usuario.Nombre);
+                datos.parametros("@apellido", usuario.Apellido);
+                datos.parametros("@fecha", usuario.Fecha);
+                return datos.ejecutarScalar();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
         }
-		public int registro(Usuario usuario)
-		{
-				AccesoDatos datos = new AccesoDatos();
-			try
-			{
-				datos.consultaSP("Registro");
-				datos.parametros("UserName", usuario.UserName);
-				datos.parametros("Name", usuario.Nombre);
-				datos.parametros("LastName", usuario.Apellido);
-				datos.parametros("BirthDate", usuario.Fecha);
-				datos.parametros("Email", usuario.Email);
-				datos.parametros("Pass", usuario.Pass);
-				return datos.ejecutarScalar();
-			}
-			catch (Exception)
-			{
+        //public Usuario traerDatos(string email)
+        //{
+        //    AccesoDatos datos = new AccesoDatos();
+        //    try
+        //    {
+        //        Usuario usuario = new Usuario();
+        //        datos.consultaEmbebida("select IdImagen, Nombre from Usuarios where Email = @email");
+        //        datos.parametros("@email", email);
+        //        datos.lectura();
+        //        if (datos.Lector.Read())
+        //        {
+        //            usuario.ImagenPerfil = new ImagenPerfil();
+        //            usuario.ImagenPerfil.Id = (int)datos.Lector["IdImagen"];
+        //            usuario.Nombre = (string)datos.Lector["Nombre"];
+        //        }
+        //        return usuario;
+        //    }
+        //    catch (Exception)
+        //    {
 
-				throw;
-			}
-			finally
-			{
-				datos.cerrarConexion();
-			}
-		}
-		public void eliminarUsuario(int Id)
-		{
-			AccesoDatos datos = new AccesoDatos();
-			try
-			{
-				datos.consultaEmbebida("Delete Users where Id = @Id");
-				datos.parametros("@Id", Id);
-				datos.ejecutar();
-			}
-			catch (Exception)
-			{
+        //        throw;
+        //    }
+        //    finally
+        //    {
+        //        datos.cerrarConexion();
+        //    }
+        //}
 
-				throw;
-			}
-			finally
-			{
-				datos.cerrarConexion();
-			}
-		}
+        public bool buscarUsuario(string email, string userName, string nombre, string apellido, string fecha)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.consultaSP("Forget");
+                datos.parametros("@email", email);
+                datos.parametros("@nombre", nombre);
+                datos.parametros("@apellido", apellido);
+                datos.parametros("@username", userName);
+                datos.parametros("@fecha", DateTime.Parse(fecha));
+                datos.lectura();
+                if (datos.Lector.Read())
+                    return true;
+                return false;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public void passForget(string pass, string email)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.consultaSP("forgetPass");
+                datos.parametros("@pass", pass);
+                datos.parametros("@email", email);
+                datos.ejecutar();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public void eliminarCuenta(int id)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.consultaEmbebida("delete from Usuarios where id = @id");
+                datos.parametros("@id", id);
+                datos.ejecutar();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public void actualizarDatos(Usuario usuario)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.consultaSP("ActualizarDatos");
+                //@nombre varchar(50),
+                //@apellido varchar(50),
+                //@email varchar(100),
+                //@pass varchar(50),
+                //@idImagen int,
+                //@id int
+                datos.parametros("@nombre", usuario.Nombre);
+                datos.parametros("@apellido", usuario.Apellido);
+                datos.parametros("@email", usuario.Email);
+                datos.parametros("@pass", usuario.Pass);
+                datos.parametros("@id", usuario.Id);
+                datos.ejecutar();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
     }
 }

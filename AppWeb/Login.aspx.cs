@@ -1,7 +1,5 @@
 ﻿using Datos;
-using Helpers;
 using ModeloDominio;
-using ServicioEmail;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -12,7 +10,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Validaciones;
 
-namespace AplicacionWeb
+namespace AppWeb
 {
     public partial class Login : System.Web.UI.Page
     {
@@ -63,17 +61,16 @@ namespace AplicacionWeb
         {
             try
             {
-                if (Validar.regexEmail(txtEmail.Text))
+                if (Validar.campoEmail(txtEmail.Text))
                 {
                     if (Validar.emailRegistrado(txtEmail.Text))
                     {
                         DatosUsuario datos = new DatosUsuario();
-                        Usuario usuario = datos.traerDatos(txtEmail.Text);
+                        //Usuario usuario = datos.traerDatos(txtEmail.Text);
                         Status = true;
                         panelEmail.Visible = false;
                         panelUsuario.Visible = true;
-                        lblPerfil.Text = usuario.Nombre;
-                        imgPerfil.ImageUrl = DatosImagenPerfil.traerImagen(usuario.ImagenPerfil.Id);
+                        //lblPerfil.Text = usuario.Nombre;
                     }
                     else
                     {
@@ -243,33 +240,33 @@ namespace AplicacionWeb
                 DatosUsuario datos = new DatosUsuario();
                 if (Validar.campoEmail(txtEmailForget.Text))
                 {
-                    if (Validar.emailRegistrado(txtEmailForget.Text))
-                    {
-                        if (datos.buscarUsuario(txtEmailForget.Text, txtNombre.Text, txtApellido.Text, txtFecha.Text))
-                        {
-                            string codigo = Helper.generarCodigo();
-                            DatosValidacionEmail.eliminarCodigo(txtEmail.Text);
-                            DatosValidacionEmail.cargarCodigo(txtEmail.Text, codigo);
-                            ServicioEmail servicio = new ServicioEmail();
-                            servicio.armarEmail(txtEmailForget.Text, "Código de validación de email", Helper.cargarCuerpo(txtEmailForget.Text, codigo), "validaciones@claves.com");
-                            servicio.enviarEmail();
-                            ajaxValidacion.Show();
-                        }
-                        else
-                        {
-                            titulo = "Datos Incorrectos";
-                            mensaje = "Los datos ingresados no corresponden a la cuenta solicitada, por favor, revise los datos e intente nuevamente.";
-                            script = string.Format("crearAlerta({0},'{1}','{2}');", false.ToString().ToLower(), titulo, mensaje);
-                            ScriptManager.RegisterStartupScript(this, GetType(), "crearAlerta", script, true);
-                        }
-                    }
-                    else
-                    {
-                        titulo = "Email no registrado";
-                        mensaje = "El email ingresado no se encuentra registrado, si lo desea puede hacerlo, haciendo click en el boton Registrarse.";
-                        script = string.Format("crearAlerta({0},'{1}','{2}');", false.ToString().ToLower(), titulo, mensaje);
-                        ScriptManager.RegisterStartupScript(this, GetType(), "crearAlerta", script, true);
-                    }
+                    //if (Validar.emailRegistrado(txtEmailForget.Text))
+                    //{
+                    //    if (datos.buscarUsuario(txtEmailForget.Text, txtNombre.Text, txtApellido.Text, txtFecha.Text))
+                    //    {
+                    //        string codigo = Helper.generarCodigo();
+                    //        DatosValidacionEmail.eliminarCodigo(txtEmail.Text);
+                    //        DatosValidacionEmail.cargarCodigo(txtEmail.Text, codigo);
+                    //        ServicioEmail servicio = new ServicioEmail();
+                    //        servicio.armarEmail(txtEmailForget.Text, "Código de validación de email", Helper.cargarCuerpo(txtEmailForget.Text, codigo), "validaciones@claves.com");
+                    //        servicio.enviarEmail();
+                    //        ajaxValidacion.Show();
+                    //    }
+                    //    else
+                    //    {
+                    //        titulo = "Datos Incorrectos";
+                    //        mensaje = "Los datos ingresados no corresponden a la cuenta solicitada, por favor, revise los datos e intente nuevamente.";
+                    //        script = string.Format("crearAlerta({0},'{1}','{2}');", false.ToString().ToLower(), titulo, mensaje);
+                    //        ScriptManager.RegisterStartupScript(this, GetType(), "crearAlerta", script, true);
+                    //    }
+                    //}
+                    //else
+                    //{
+                    //    titulo = "Email no registrado";
+                    //    mensaje = "El email ingresado no se encuentra registrado, si lo desea puede hacerlo, haciendo click en el boton Registrarse.";
+                    //    script = string.Format("crearAlerta({0},'{1}','{2}');", false.ToString().ToLower(), titulo, mensaje);
+                    //    ScriptManager.RegisterStartupScript(this, GetType(), "crearAlerta", script, true);
+                    //}
                 }
                 else
                 {

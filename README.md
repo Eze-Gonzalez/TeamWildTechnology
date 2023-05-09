@@ -25,3 +25,6 @@ Creación y desarrollo temprano del proyecto.
 
 _______________________________________________________
 
+<h4><b>V0.0012</b></h4>
+Creación de la página de Login.
+

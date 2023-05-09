@@ -7,7 +7,7 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace AplicacionWeb
+namespace AppWeb
 {
 
 
@@ -60,15 +60,6 @@ namespace AplicacionWeb
         protected global::System.Web.UI.WebControls.Panel panelUsuario;
 
         /// <summary>
-        /// Control imgPerfil.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Image imgPerfil;
-
-        /// <summary>
         /// Control lblPerfil.
         /// </summary>
         /// <remarks>
@@ -111,7 +102,7 @@ namespace AplicacionWeb
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnLogin;
+        protected global::System.Web.UI.WebControls.LinkButton btnLogin;
 
         /// <summary>
         /// Control btnSiguiente.
@@ -120,7 +111,7 @@ namespace AplicacionWeb
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSiguiente;
+        protected global::System.Web.UI.WebControls.LinkButton btnSiguiente;
 
         /// <summary>
         /// Control panelForget.

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/TWT.Master" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="AplicacionWeb.Login" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/TWT.Master" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="AppWeb.Login" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -7,59 +7,50 @@
         <ContentTemplate>
             <asp:Panel ID="panelLogin" runat="server">
                 <section>
-                    <div class="form-box">
-                        <div class="form-value">
+                    <div class="modalLogin">
+                        <div class="userData">
                             <h2>Iniciar Sesión</h2>
                             <asp:Panel ID="panelEmail" runat="server">
-                                <div class="imputbox">
-                                    <ion-icon name="mail-outline"></ion-icon>
+                                <div class="input-box">
+                                    <label>Email</label>
                                     <asp:TextBox ID="txtEmail" CssClass="input" runat="server"></asp:TextBox>
-                                    <label for="">Email</label>
                                 </div>
                             </asp:Panel>
                             <%if (Validaciones.Validar.emailRegistrado(txtEmail.Text))
                                 {  %>
                             <asp:Panel ID="panelUsuario" runat="server">
-                                <div class="row">
-                                    <div class="usercard">
-                                        <asp:Image ID="imgPerfil" CssClass="rounded-circle" runat="server" Width="40px" Height="40px" />
-                                        <asp:Label ID="lblPerfil" runat="server" Text="Nombre"></asp:Label>
-                                        <div>
-                                            <label>¿No es su cuenta?</label>
-                                            <asp:LinkButton ID="lnkOtro" runat="server" OnClick="lnkOtro_Click">Cambiar Cuenta</asp:LinkButton>
-                                        </div>
-                                    </div>
+                                <div class="panelUsuario">
+                                    <asp:Label ID="lblPerfil" runat="server" Text="Nombre"></asp:Label>
+                                    <label>¿No es su cuenta?</label>
+                                    <asp:LinkButton ID="lnkOtro" runat="server" OnClick="lnkOtro_Click">Cambiar Cuenta</asp:LinkButton>
                                 </div>
                             </asp:Panel>
-                            <div class="imputbox">
-                                <asp:TextBox ID="txtPass" ClientIDMode="Static" TextMode="Password" CssClass="input" runat="server"></asp:TextBox>
-                                <label for="">Contraseña</label>
-                                <button id="mostrar" onclick="mostrarPass('txtPass', 'icono')" type="button" class="boton-mostrar"><i id="icono" class="fa fa-eye-slash"></i></button>
+                            <div class="input-box">
+                                <label>Contraseña</label>
+                                <div>
+                                    <asp:TextBox ID="txtPass" ClientIDMode="Static" TextMode="Password" CssClass="input" runat="server"></asp:TextBox>
+                                    <button id="mostrar" onclick="mostrarPass('txtPass', 'icono')" type="button" class="boton-mostrar"><i id="icono" class="fa fa-eye-slash"></i></button>
+                                </div>
                             </div>
                             <div class="forget">
                                 <asp:LinkButton ID="lnkForget" runat="server" OnClick="lnkForget_Click">Olvidé mi contraseña</asp:LinkButton>
                             </div>
                             <%}
                             %>
-                            <div class="row">
+                            <div class="modal-footer">
                                 <%if (Status)
                                     {  %>
-                                <div class="col flex-end me-3">
-                                    <asp:Button ID="btnLogin" CssClass="button w-120" runat="server" Text="Iniciar Sesión" OnClick="btnLogin_Click" />
-                                </div>
+                                <asp:LinkButton ID="btnLogin" CssClass="btnNext" runat="server" OnClick="btnLogin_Click"><span class="btnText">INCIAR SESIÓN</span><span class="bgHover"></span></asp:LinkButton>
                                 <%}
                                     else
                                     { %>
-                                <div class="col flex-end me-3">
-                                    <asp:Button ID="btnSiguiente" CssClass="button w-120" runat="server" Text="Siguiente" OnClick="txtEmail_TextChanged" />
-                                </div>
+                                <asp:LinkButton ID="btnSiguiente" CssClass="btnNext" runat="server" OnClick="txtEmail_TextChanged"><span class="btnText">SIGUIENTE</span><span class="bgHover"></span></asp:LinkButton>
                                 <%} %>
-                                <div class="col flex-start">
-                                    <a href="Default.aspx" class="buttonCancelar w-120">Cancelar</a>
-                                </div>
+                                <a href="Default.aspx" class="btnCancelar"><span class="btnText">CANCELAR</span><span class="bgHover"></span></a>
                             </div>
                             <div class="register">
-                                <p>No tiene cuenta?<a href="Register.aspx" class="ms-2">Registrese aquí</a></p>
+                                <p>¿No tiene cuenta?</p>
+                                <a href="Register.aspx" class="ms-2">Registrese aquí</a>
                             </div>
                         </div>
                     </div>
