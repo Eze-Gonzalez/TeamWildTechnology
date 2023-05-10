@@ -12,11 +12,11 @@
                             <h2>Iniciar Sesión</h2>
                             <asp:Panel ID="panelEmail" runat="server">
                                 <div class="input-box">
-                                    <label>Email</label>
+                                    <label>Email/Nombre de usuario</label>
                                     <asp:TextBox ID="txtEmail" CssClass="input" runat="server"></asp:TextBox>
                                 </div>
                             </asp:Panel>
-                            <%if (Validaciones.Validar.emailRegistrado(txtEmail.Text))
+                            <%if (Validaciones.Validar.usuarioRegistrado(txtEmail.Text))
                                 {  %>
                             <asp:Panel ID="panelUsuario" runat="server">
                                 <div class="panelUsuario">
@@ -58,59 +58,49 @@
             </asp:Panel>
             <asp:Panel ID="panelForget" runat="server" Visible="false">
                 <section>
-                    <div class="form-box">
-                        <div class="form-value">
+                    <div class="modalLogin">
+                        <div class="userData h70">
                             <h2>Cambiar Contraseña</h2>
                             <asp:Panel ID="panelDatos" runat="server">
-                                <div class="imputbox">
-                                    <ion-icon name="mail-outline"></ion-icon>
-                                    <asp:TextBox ID="txtEmailForget" CssClass="input" runat="server"></asp:TextBox>
+                                <div class="input-box">
                                     <label for="">Email</label>
+                                    <asp:TextBox ID="txtEmailForget" CssClass="input" runat="server"></asp:TextBox>
                                 </div>
-                                <div class="imputbox">
-                                    <asp:TextBox ID="txtNombre" CssClass="input" runat="server"></asp:TextBox>
+                                <div class="input-box">
                                     <label for="">Nombre</label>
+                                    <asp:TextBox ID="txtNombre" CssClass="input" runat="server"></asp:TextBox>
                                 </div>
-                                <div class="imputbox">
-                                    <asp:TextBox ID="txtApellido" CssClass="input" runat="server"></asp:TextBox>
+                                <div class="input-box">
                                     <label for="">Apellido</label>
+                                    <asp:TextBox ID="txtApellido" CssClass="input" runat="server"></asp:TextBox>
                                 </div>
-                                <div class="imputbox">
-                                    <asp:TextBox ID="txtFecha" TextMode="Date" CssClass="input" runat="server"></asp:TextBox>
+                                <div class="input-box">
                                     <label for="">Fecha de nacimiento</label>
+                                    <asp:TextBox ID="txtFecha" TextMode="Date" CssClass="input" runat="server"></asp:TextBox>
                                 </div>
                             </asp:Panel>
                             <asp:Panel ID="panelPassF" Visible="false" runat="server">
-                                <div class="imputbox">
+                                <div class="input-box">
                                     <asp:TextBox ID="txtPassForget" ClientIDMode="Static" TextMode="Password" CssClass="input" runat="server"></asp:TextBox>
                                     <label for="">Contraseña</label>
                                     <button id="mostrarF" onclick="mostrarPass('txtPassForget', 'iconoF')" type="button" class="boton-mostrar"><i id="iconoF" class="fa fa-eye-slash"></i></button>
                                 </div>
-                                <div class="imputbox">
+                                <div class="input-box">
                                     <asp:TextBox ID="txtRepetirForget" ClientIDMode="Static" TextMode="Password" CssClass="input" runat="server"></asp:TextBox>
                                     <label for="">Contraseña</label>
                                     <button id="mostrarRF" onclick="mostrarPass('txtRepetirForget', 'iconoRF')" type="button" class="boton-mostrar"><i id="iconoRF" class="fa fa-eye-slash"></i></button>
                                 </div>
                             </asp:Panel>
-                            <div class="row">
-                                <div class="loader-container" style="bottom: 10px;">
-                                    <span id="loader"></span>
-                                </div>
+                            <div class="modal-footer">
                                 <%if (StatusF)
                                     {  %>
-                                <div class="col flex-end me-3">
-                                    <asp:Button ID="btnCambiar" CssClass="button w-120" runat="server" Text="Guardar" OnClick="btnCambiar_Click" />
-                                </div>
+                                <asp:LinkButton ID="btnCambiar" runat="server" CssClass="btnNext" OnClick="btnCambiar_Click"><span class="btnText">GUARDAR</span><span class="bgHover"></span></asp:LinkButton>
                                 <%}
                                     else
                                     { %>
-                                <div class="col flex-end me-3">
-                                    <asp:Button ID="btnSiguienteF" CssClass="button w-120" runat="server" Text="Siguiente" OnClick="btnSiguienteF_Click" OnClientClick="disableButtonR(this)" />
-                                </div>
+                                <asp:LinkButton ID="btnSiguienteF" runat="server" CssClass="btnNext" OnClick="btnSiguienteF_Click" OnClientClick="disableButtonR(this)"><span class="btnText">SIGUIENTE</span><span class="bgHover"></span></asp:LinkButton>
                                 <%} %>
-                                <div class="col flex-start">
-                                    <asp:Button ID="btnCancelar" CssClass="buttonCancelar w-120" runat="server" Text="Cancelar" OnClick="btnCancelar_Click" />
-                                </div>
+                                <asp:LinkButton ID="btnCancelarF" runat="server" CssClass="btnCancelar" OnClick="btnCancelar_Click"><span class="btnText">CANCELAR</span><span class="bgHover"></span></asp:LinkButton>
                             </div>
                         </div>
                     </div>
@@ -118,14 +108,10 @@
             </asp:Panel>
         </ContentTemplate>
     </asp:UpdatePanel>
-    <asp:Panel ID="modalValidacion" CssClass="modalAbrir text-center" runat="server">
-        <div class="card bg-black">
-            <div class="card-body">
-                <p class="form-label">Se le ha enviado un código de validación al email ingresado, ingreselo a continuación</p>
-            </div>
-            <div class="mb-3 center-row">
-                <asp:TextBox ID="txtVerificar" CssClass="form-control w-75" placeholder="Ingrese el código de validación" runat="server" onkeypress="return forzarMayus(event)"></asp:TextBox>
-            </div>
+    <asp:Panel ID="modalValidacion" CssClass="modalValidacion" runat="server">
+        <div class="modalValidacion__Body">
+            <p class="form-label">Se le ha enviado un código de validación al email, ingréselo a continuación</p>
+            <asp:TextBox ID="txtVerificar" CssClass="codigo" placeholder="Código de validación" runat="server" onkeypress="return forzarMayus(event)"></asp:TextBox>
             <asp:UpdatePanel ID="UpdatePanel3" runat="server">
                 <ContentTemplate>
                     <div class="mb-3">
@@ -136,17 +122,11 @@
                     <asp:AsyncPostBackTrigger ControlID="btnValidar" EventName="Click" />
                 </Triggers>
             </asp:UpdatePanel>
-            <div class="mb-3">
-            </div>
             <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                 <ContentTemplate>
-                    <div class="row center-row">
-                        <div class="col mb-3">
-                            <asp:Button ID="btnValidar" ClientIDMode="Static" CssClass="btn btn-outline-light btn-primary w-160" runat="server" Text="Validar Email" OnClick="btnValidar_Click" />
-                        </div>
-                        <div class="col mb-3">
-                            <asp:Button ID="btnCacelarValidacion" ClientIDMode="Static" CssClass="btn btn-outline-light btn-danger w-160" runat="server" Text="Cancelar" OnClick="btnCacelarValidacion_Click" />
-                        </div>
+                    <div class="modal-footer h10">
+                        <asp:LinkButton ID="btnValidar" CssClass="btnNext" runat="server" OnClick="btnValidar_Click"><span class="btnText">VALIDAR</span><span class="bgHover"></span></asp:LinkButton>
+                        <asp:LinkButton ID="btnCacelarValidacion" CssClass="btnCancelar" runat="server" OnClick="btnCacelarValidacion_Click"><span class="btnText">CANCELAR</span><span class="bgHover"></span></asp:LinkButton>
                     </div>
                 </ContentTemplate>
             </asp:UpdatePanel>

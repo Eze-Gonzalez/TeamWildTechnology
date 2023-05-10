@@ -38,33 +38,29 @@ namespace Datos
                 datos.cerrarConexion();
             }
         }
-        //public Usuario traerDatos(string email)
-        //{
-        //    AccesoDatos datos = new AccesoDatos();
-        //    try
-        //    {
-        //        Usuario usuario = new Usuario();
-        //        datos.consultaEmbebida("select IdImagen, Nombre from Usuarios where Email = @email");
-        //        datos.parametros("@email", email);
-        //        datos.lectura();
-        //        if (datos.Lector.Read())
-        //        {
-        //            usuario.ImagenPerfil = new ImagenPerfil();
-        //            usuario.ImagenPerfil.Id = (int)datos.Lector["IdImagen"];
-        //            usuario.Nombre = (string)datos.Lector["Nombre"];
-        //        }
-        //        return usuario;
-        //    }
-        //    catch (Exception)
-        //    {
+        public string traerDatos(string user)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                string nombre = "";
+                datos.consultaEmbebida("select UserName from Users where Email = @usuario or UserName = @usuario");
+                datos.parametros("@usuario", user);
+                datos.lectura();
+                if (datos.Lector.Read())
+                    nombre = (string)datos.Lector["UserName"];
+                return nombre;
+            }
+            catch (Exception)
+            {
 
-        //        throw;
-        //    }
-        //    finally
-        //    {
-        //        datos.cerrarConexion();
-        //    }
-        //}
+                throw;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
 
         public bool buscarUsuario(string email, string userName, string nombre, string apellido, string fecha)
         {

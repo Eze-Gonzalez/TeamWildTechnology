@@ -201,7 +201,7 @@ namespace AppWeb
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCambiar;
+        protected global::System.Web.UI.WebControls.LinkButton btnCambiar;
 
         /// <summary>
         /// Control btnSiguienteF.
@@ -210,16 +210,16 @@ namespace AppWeb
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSiguienteF;
+        protected global::System.Web.UI.WebControls.LinkButton btnSiguienteF;
 
         /// <summary>
-        /// Control btnCancelar.
+        /// Control btnCancelarF.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCancelar;
+        protected global::System.Web.UI.WebControls.LinkButton btnCancelarF;
 
         /// <summary>
         /// Control modalValidacion.
@@ -273,7 +273,7 @@ namespace AppWeb
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnValidar;
+        protected global::System.Web.UI.WebControls.LinkButton btnValidar;
 
         /// <summary>
         /// Control btnCacelarValidacion.
@@ -282,7 +282,7 @@ namespace AppWeb
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCacelarValidacion;
+        protected global::System.Web.UI.WebControls.LinkButton btnCacelarValidacion;
 
         /// <summary>
         /// Control btnMostrarModal.

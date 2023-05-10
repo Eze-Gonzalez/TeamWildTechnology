@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ModeloDominio;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,12 +14,29 @@ namespace AppWeb
         {
 			try
 			{
+				Usuario usuario = new Usuario();
+				usuario.Id = 9;
+				Session["usuario"] = usuario;
 				if (Session["Error"] != null && Session["ErrorCode"] != null)
 				{
 					Title = Session["ErrorCode"].ToString();
 					lblErrorCode.Text = Session["ErrorCode"].ToString();
 					lblError.Text = Session["Error"].ToString();
 				}
+			}
+			catch (Exception)
+			{
+
+				throw;
+			}
+        }
+
+        protected void lnkCerrarSesion_Click(object sender, EventArgs e)
+        {
+			try
+			{
+				Session.Clear();
+				Response.Redirect("Default.aspx", false);
 			}
 			catch (Exception)
 			{

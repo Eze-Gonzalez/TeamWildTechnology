@@ -61,27 +61,22 @@ namespace AppWeb
         {
             try
             {
-                if (Validar.campoEmail(txtEmail.Text))
+                if (Validar.usuarioRegistrado(txtEmail.Text))
                 {
-                    if (Validar.emailRegistrado(txtEmail.Text))
-                    {
-                        DatosUsuario datos = new DatosUsuario();
-                        //Usuario usuario = datos.traerDatos(txtEmail.Text);
-                        Status = true;
-                        panelEmail.Visible = false;
-                        panelUsuario.Visible = true;
-                        //lblPerfil.Text = usuario.Nombre;
-                    }
-                    else
-                    {
-                        panelEmail.Visible = true;
-                        panelUsuario.Visible = false;
-                        cargarAlerta("Email no registrado", "El email ingresado no se encuentra registrado, si desea, puede registrarse, haciendo click en el boton Registrarse", false);
-                    }
-
+                    DatosUsuario datos = new DatosUsuario();
+                    string nombre = datos.traerDatos(txtEmail.Text);
+                    Status = true;
+                    panelEmail.Visible = false;
+                    panelUsuario.Visible = true;
+                    lblPerfil.Text = nombre;
                 }
                 else
-                    cargarAlerta("Email no válido", "El email ingresado no es válido, verifique el campo email e intente nuevamente con uno válido", false);
+                {
+                    panelEmail.Visible = true;
+                    panelUsuario.Visible = false;
+                    cargarAlerta("Email no registrado", "El email ingresado no se encuentra registrado, si desea, puede registrarse, haciendo click en el boton Registrarse", false);
+                }
+
             }
             catch (Exception ex)
             {
@@ -108,6 +103,7 @@ namespace AppWeb
                 }
                 Usuario usuario = new Usuario();
                 usuario.Email = txtEmail.Text;
+                usuario.UserName = txtEmail.Text;
                 usuario.Pass = txtPass.Text;
                 if (!string.IsNullOrEmpty(txtPass.Text) && txtPass.Text != " " && !(txtPass.Text.Length > 20 || txtPass.Text.Length < 6))
                 {

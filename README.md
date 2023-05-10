@@ -28,3 +28,8 @@ _______________________________________________________
 <h4><b>V0.0012</b></h4>
 Creación de la página de Login.
 
+_______________________________________________________
+
+<h4><b>V0.0013</b></h4>
+<p>Creación de la página de error.</p>
+<p>Definición y corrección de la pagina de Login</p>

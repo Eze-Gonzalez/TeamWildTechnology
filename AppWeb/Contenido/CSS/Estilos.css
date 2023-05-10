@@ -27,6 +27,19 @@ img {
     width: 100%
 }
 
+.h70{
+    height: 70% !important;
+}
+
+.h10{
+    height: 10% !important;
+}
+
+.danger {
+    color: #f00;
+    font-weight: 600;
+}
+
 .nav {
     position: fixed;
     width: 100%;
@@ -219,7 +232,43 @@ footer {
     padding: 10px;
 }
 
-@media screen and (min-width: 800px) and (max-width: 1024px) {
+.card {
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(to top, #000000d1, #140f0fd1);
+    color: #fff;
+    font-size: 4em;
+    padding: 20px;
+}
+
+.card__tittle {
+    text-align: center;
+    font-size: 1em;
+    border-bottom: 1px solid #fff;
+    box-shadow: inset 1px -5px 0px 0px #fff;
+    margin-bottom: 15%;
+    padding: 0 20px 30px 20px;
+}
+
+.card__footer {
+    transform: translateY(18em);
+    height: 20%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2,1fr);
+}
+
+    .card__footer a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50px;
+        margin-bottom: 30px;
+        margin-left: 30px;
+        text-align: center;
+    }
+
+/*@media screen and (min-width: 800px) and (max-width: 1024px) {
     body {
         background-image: url(../twt.png);
         background-repeat: repeat;
@@ -230,4 +279,4 @@ footer {
 }
 
 @media screen and (min-width: 1024px) {
-}
+}*/

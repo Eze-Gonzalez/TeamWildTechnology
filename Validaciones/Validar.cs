@@ -3,6 +3,7 @@ using ModeloDominio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -32,17 +33,44 @@ namespace Validaciones
             {
                 datos.consultaSP("IniciarSesion");
                 datos.parametros("@email", usuario.Email);
+                datos.parametros("@userName", usuario.UserName);
                 datos.parametros("@pass", usuario.Pass);
                 datos.lectura();
                 if (datos.Lector.Read())
                 {
-                    //Id, Email, Pass, Nombre, Apellido, IdImagen, FechaNacimiento, ServiciosTotales 
+                    //Id, UserName, Nombre, Apellido, BirthDate, Email, Pass, TwoFactor, TwoFactorType, Premium
                     usuario.Id = (int)datos.Lector["Id"];
-                    usuario.Email = (string)datos.Lector["Email"];
-                    usuario.Pass = (string)datos.Lector["Pass"];
+                    usuario.UserName = (string)datos.Lector["UserName"];
                     usuario.Nombre = (string)datos.Lector["Nombre"];
                     usuario.Apellido = (string)datos.Lector["Apellido"];
-                    usuario.Fecha = (DateTime)datos.Lector["FechaNacimiento"];
+                    usuario.Fecha = (DateTime)datos.Lector["BirthDate"];
+                    usuario.Email = (string)datos.Lector["Email"];
+                    usuario.Pass = (string)datos.Lector["Pass"];
+                    usuario.TwoFactor = (bool)datos.Lector["TwoFactor"];
+                    int type = datos.Lector["TwoFactorType"] is DBNull ? 0 : (int)datos.Lector["TwoFactorType"];
+                    switch (type)
+                    {
+                        //None = 0,
+                        //App = 1,
+                        //Email = 2,
+                        //SMS = 3,
+                        //Call = 4
+                        case 0:
+                            usuario.TwoFactorType = TwoFactorType.None;
+                            break;
+                        case 1:
+                            usuario.TwoFactorType = TwoFactorType.App;
+                            break;
+                        case 2:
+                            usuario.TwoFactorType = TwoFactorType.Email;
+                            break;
+                        case 3:
+                            usuario.TwoFactorType = TwoFactorType.SMS;
+                            break;
+                        case 4:
+                            usuario.TwoFactorType = TwoFactorType.Call;
+                            break;
+                    }
                     return true;
                 }
                 return false;
@@ -57,13 +85,13 @@ namespace Validaciones
                 datos.cerrarConexion();
             }
         }
-        public static bool emailRegistrado(string email)
+        public static bool usuarioRegistrado(string usuario)
         {
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.consultaEmbebida("select id from Users where Email = @email");
-                datos.parametros("@email", email);
+                datos.consultaEmbebida("select id from Users where Email = @usuario or UserName = @usuario");
+                datos.parametros("@usuario", usuario);
                 datos.lectura();
                 if (datos.Lector.Read())
                     return true;
@@ -119,7 +147,7 @@ namespace Validaciones
         {
             try
             {
-                Regex regex = new Regex("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\\w\\s]).{6,20}$");
+                Regex regex = new Regex("^(?=[^a-zA-Z0-9]*[a-z])(?=[^a-zA-Z0-9]*[A-Z])(?=[^a-zA-Z0-9]*\\d)(?=[^a-zA-Z0-9]*[@#$%^&+=!?.])(?!.*[a-zA-Z0-9]{2})(?!.*([a-zA-Z\\d])\\1{2})[a-zA-Z\\d@#$%^&+=!?.]{6,20}$");
                 bool validar = regex.IsMatch(pass);
                 return validar;
             }
