@@ -38,4 +38,5 @@ _______________________________________________________
 
 <h4><b>V0.0014</b></h4>
 <p>Corregidos varios fallos en la página de Login.</p>
-<p>Creación de la pagina de registro</p>
+<p>Creación de la página de registro</p>
+<p>Establecido el diseño de la página de error * Pendiente de terminar</p>
