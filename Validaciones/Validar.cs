@@ -112,7 +112,7 @@ namespace Validaciones
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.consultaEmbebida("select id from Usuarios where PassTemporal COLLATE Latin1_General_CS_AS = @pass");
+                datos.consultaEmbebida("select id from Users where PassTemporal COLLATE Latin1_General_CS_AS = @pass");
                 datos.parametros("@pass", pass);
                 datos.lectura();
                 if (datos.Lector.Read())
@@ -372,6 +372,22 @@ namespace Validaciones
             finally
             {
                 datos.cerrarConexion();
+            }
+        }
+
+        public static bool regexUsuario(string userName)
+        {
+            try
+            {
+                string regexPattern = @"^[a-zA-Z0-9]{6,20}$";
+                if (Regex.IsMatch(userName, regexPattern) && !Regex.IsMatch(userName, @"[\p{P}\p{S}\p{Z}\p{L}]+"))
+                    return true;
+                return false;
+            }
+            catch (Exception)
+            {
+
+                throw;
             }
         }
     }

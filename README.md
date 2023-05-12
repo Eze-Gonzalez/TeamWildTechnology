@@ -33,3 +33,9 @@ _______________________________________________________
 <h4><b>V0.0013</b></h4>
 <p>Creación de la página de error.</p>
 <p>Definición y corrección de la pagina de Login</p>
+
+_______________________________________________________
+
+<h4><b>V0.0014</b></h4>
+<p>Corregidos varios fallos en la página de Login.</p>
+<p>Creación de la pagina de registro</p>

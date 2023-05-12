@@ -63,20 +63,29 @@ namespace AppWeb
         {
             try
             {
-                if (Validar.usuarioRegistrado(txtEmail.Text))
+                if(Validar.regexUsuario(txtEmail.Text) || Validar.campoEmail(txtEmail.Text))
                 {
-                    DatosUsuario datos = new DatosUsuario();
-                    string nombre = datos.traerDatos(txtEmail.Text);
-                    Status = true;
-                    panelEmail.Visible = false;
-                    panelUsuario.Visible = true;
-                    lblPerfil.Text = nombre;
+                    if (Validar.usuarioRegistrado(txtEmail.Text))
+                    {
+                        DatosUsuario datos = new DatosUsuario();
+                        string nombre = datos.traerDatos(txtEmail.Text);
+                        Status = true;
+                        panelEmail.Visible = false;
+                        panelUsuario.Visible = true;
+                        lblPerfil.Text = nombre;
+                    }
+                    else
+                    {
+                        panelEmail.Visible = true;
+                        panelUsuario.Visible = false;
+                        cargarAlerta("Email no registrado", "El email ingresado no se encuentra registrado, si desea, puede registrarse, haciendo click en el boton Registrarse", false);
+                    }
                 }
                 else
                 {
                     panelEmail.Visible = true;
                     panelUsuario.Visible = false;
-                    cargarAlerta("Email no registrado", "El email ingresado no se encuentra registrado, si desea, puede registrarse, haciendo click en el boton Registrarse", false);
+                    cargarAlerta("Campo incompleto", "El campo debe ser completado con un email o nombre de usuario.", false);
                 }
 
             }
