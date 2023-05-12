@@ -79,7 +79,6 @@
     <Content Include="Default.aspx" />
     <Content Include="Error.aspx" />
     <Content Include="Global.asax" />
-    <Content Include="Helper.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="Register.aspx" />
     <Content Include="Web.config" />
@@ -101,13 +100,6 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="Helper.aspx.cs">
-      <DependentUpon>Helper.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Helper.aspx.designer.cs">
-      <DependentUpon>Helper.aspx</DependentUpon>
     </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
@@ -154,6 +146,10 @@
     <ProjectReference Include="..\Datos\Datos.csproj">
       <Project>{476fb645-8b40-46bb-b4e3-d163fa74229c}</Project>
       <Name>Datos</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Helpers\Helpers.csproj">
+      <Project>{c8ed945d-c94c-43e0-8937-9dad25f7c34b}</Project>
+      <Name>Helpers</Name>
     </ProjectReference>
     <ProjectReference Include="..\ModeloDominio\ModeloDominio.csproj">
       <Project>{3c4e32f4-0576-4d55-92f2-f759b37b781e}</Project>

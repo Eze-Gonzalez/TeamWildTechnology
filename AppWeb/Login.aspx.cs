@@ -9,6 +9,8 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Validaciones;
+using Helpers;
+using ServicioEmail;
 
 namespace AppWeb
 {
@@ -236,33 +238,33 @@ namespace AppWeb
                 DatosUsuario datos = new DatosUsuario();
                 if (Validar.campoEmail(txtEmailForget.Text))
                 {
-                    //if (Validar.emailRegistrado(txtEmailForget.Text))
-                    //{
-                    //    if (datos.buscarUsuario(txtEmailForget.Text, txtNombre.Text, txtApellido.Text, txtFecha.Text))
-                    //    {
-                    //        string codigo = Helper.generarCodigo();
-                    //        DatosValidacionEmail.eliminarCodigo(txtEmail.Text);
-                    //        DatosValidacionEmail.cargarCodigo(txtEmail.Text, codigo);
-                    //        ServicioEmail servicio = new ServicioEmail();
-                    //        servicio.armarEmail(txtEmailForget.Text, "Código de validación de email", Helper.cargarCuerpo(txtEmailForget.Text, codigo), "validaciones@claves.com");
-                    //        servicio.enviarEmail();
-                    //        ajaxValidacion.Show();
-                    //    }
-                    //    else
-                    //    {
-                    //        titulo = "Datos Incorrectos";
-                    //        mensaje = "Los datos ingresados no corresponden a la cuenta solicitada, por favor, revise los datos e intente nuevamente.";
-                    //        script = string.Format("crearAlerta({0},'{1}','{2}');", false.ToString().ToLower(), titulo, mensaje);
-                    //        ScriptManager.RegisterStartupScript(this, GetType(), "crearAlerta", script, true);
-                    //    }
-                    //}
-                    //else
-                    //{
-                    //    titulo = "Email no registrado";
-                    //    mensaje = "El email ingresado no se encuentra registrado, si lo desea puede hacerlo, haciendo click en el boton Registrarse.";
-                    //    script = string.Format("crearAlerta({0},'{1}','{2}');", false.ToString().ToLower(), titulo, mensaje);
-                    //    ScriptManager.RegisterStartupScript(this, GetType(), "crearAlerta", script, true);
-                    //}
+                    if (Validar.usuarioRegistrado(txtEmailForget.Text))
+                    {
+                        if (datos.buscarUsuario(txtEmailForget.Text, txtNombre.Text, txtApellido.Text, txtFecha.Text))
+                        {
+                            string codigo = Helper.generarCodigo();
+                            DatosValidacionEmail.eliminarCodigo(txtEmail.Text);
+                            DatosValidacionEmail.cargarCodigo(txtEmail.Text, codigo);
+                            Email servicio = new Email();
+                            servicio.armarEmail(txtEmailForget.Text, "Código de validación de email", Helper.cargarCuerpo(txtEmailForget.Text, codigo), "info@teamwildtechnology.com");
+                            servicio.enviarEmail();
+                            ajaxValidacion.Show();
+                        }
+                        else
+                        {
+                            titulo = "Datos Incorrectos";
+                            mensaje = "Los datos ingresados no corresponden a la cuenta solicitada, por favor, revise los datos e intente nuevamente.";
+                            script = string.Format("crearAlerta({0},'{1}','{2}');", false.ToString().ToLower(), titulo, mensaje);
+                            ScriptManager.RegisterStartupScript(this, GetType(), "crearAlerta", script, true);
+                        }
+                    }
+                    else
+                    {
+                        titulo = "Email no registrado";
+                        mensaje = "El email ingresado no se encuentra registrado, si lo desea puede hacerlo, haciendo click en el boton Registrarse.";
+                        script = string.Format("crearAlerta({0},'{1}','{2}');", false.ToString().ToLower(), titulo, mensaje);
+                        ScriptManager.RegisterStartupScript(this, GetType(), "crearAlerta", script, true);
+                    }
                 }
                 else
                 {

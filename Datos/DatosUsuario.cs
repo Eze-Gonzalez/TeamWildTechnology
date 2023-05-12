@@ -62,7 +62,7 @@ namespace Datos
             }
         }
 
-        public bool buscarUsuario(string email, string userName, string nombre, string apellido, string fecha)
+        public bool buscarUsuario(string email, string nombre, string apellido, string fecha)
         {
             AccesoDatos datos = new AccesoDatos();
             try
@@ -71,7 +71,7 @@ namespace Datos
                 datos.parametros("@email", email);
                 datos.parametros("@nombre", nombre);
                 datos.parametros("@apellido", apellido);
-                datos.parametros("@username", userName);
+                datos.parametros("@username", email);
                 datos.parametros("@fecha", DateTime.Parse(fecha));
                 datos.lectura();
                 if (datos.Lector.Read())
