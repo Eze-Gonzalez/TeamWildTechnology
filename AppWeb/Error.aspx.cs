@@ -12,37 +12,36 @@ namespace AppWeb
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-			try
-			{
-				Usuario usuario = new Usuario();
-				usuario.Id = 9;
-				Session["usuario"] = usuario;
-				if (Session["Error"] != null && Session["ErrorCode"] != null)
-				{
-					Title = Session["ErrorCode"].ToString();
-					lblErrorCode.Text = Session["ErrorCode"].ToString();
-					lblError.Text = Session["Error"].ToString();
-				}
-			}
-			catch (Exception)
-			{
+            try
+            {
+                if (Session["Error"] != null && Session["ErrorCode"] != null)
+                {
+                    Title = Session["ErrorCode"].ToString();
+                    lblErrorCode.Text = Session["ErrorCode"].ToString();
+                    lblError.Text = Session["Error"].ToString();
+                }
+                else
+                    Response.Redirect("Default.aspx");
+            }
+            catch (Exception)
+            {
 
-				throw;
-			}
+                throw;
+            }
         }
 
         protected void lnkCerrarSesion_Click(object sender, EventArgs e)
         {
-			try
-			{
-				Session.Clear();
-				Response.Redirect("Default.aspx", false);
-			}
-			catch (Exception)
-			{
+            try
+            {
+                Session.Clear();
+                Response.Redirect("Default.aspx", false);
+            }
+            catch (Exception)
+            {
 
-				throw;
-			}
+                throw;
+            }
         }
     }
 }

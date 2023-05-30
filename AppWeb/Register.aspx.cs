@@ -45,7 +45,20 @@ namespace AppWeb
                 Response.Redirect("Error.aspx", false);
             }
         }
-
+        private void crearScript(string titulo, string mensaje, bool status)
+        {
+            try
+            {
+                script = string.Format("crearAlerta({0},'{1}','{2}');", status.ToString().ToLower(), titulo, mensaje);
+                ScriptManager.RegisterStartupScript(this, GetType(), "crearAlerta", script, true);
+            }
+            catch (Exception ex)
+            {
+                Session.Add("ErrorCode", "Hubo un problema al cargar la página");
+                Session.Add("Error", ex.Message);
+                Response.Redirect("Error.aspx", false);
+            }
+        }
         protected void btnSiguiente_Click(object sender, EventArgs e)
         {
             try
@@ -59,8 +72,7 @@ namespace AppWeb
                             Status = false;
                             titulo = "Email ya registrado";
                             mensaje = "El email ingresado ya se encuentra registrado, si desea iniciar sesión con ese email, haga click en Iniciar Sesión";
-                            script = string.Format("crearAlerta({0},'{1}','{2}');", false.ToString().ToLower(), titulo, mensaje);
-                            ScriptManager.RegisterStartupScript(this, GetType(), "crearAlerta", script, true);
+                            crearScript(titulo, mensaje, false);
                         }
                         else
                         {
@@ -78,8 +90,7 @@ namespace AppWeb
                     {
                         titulo = "Email no válido";
                         mensaje = "El email no tiene un formato válido o esta vacío, debe ingresar un email válido para continuar.";
-                        script = string.Format("crearAlerta({0},'{1}','{2}');", false.ToString().ToLower(), titulo, mensaje);
-                        ScriptManager.RegisterStartupScript(this, GetType(), "crearAlerta", script, true);
+                        crearScript(titulo, mensaje, false);
                     }
                 }
                 else
@@ -88,13 +99,25 @@ namespace AppWeb
                     {
                         if (txtRepetir.Text == txtPass.Text)
                         {
-                            Usuario usuario = new Usuario();
-                            usuario.Email = txtEmail.Text;
-                            usuario.Pass = txtPass.Text;
-                            Session["usuario"] = usuario;
-                            Status = true;
-                            StatusV = true;
-                            StatusP = true;
+                            if (Validar.regexUsuario(txtUsuario.Text))
+                            {
+                                Usuario usuario = new Usuario();
+                                usuario.Email = txtEmail.Text;
+                                usuario.UserName = txtUsuario.Text;
+                                usuario.Pass = txtPass.Text;
+                                Session["usuario"] = usuario;
+                                Status = true;
+                                StatusV = true;
+                                StatusP = true;
+                            }
+                            else
+                            {
+                                Status = true;
+                                StatusV = true;
+                                titulo = "Nombre de usuario no válido";
+                                mensaje = "El nombre de usuario no es válido, debe ingresar un usuario de 6 a 20 dígitos, sin espacios ni símbolos.";
+                                crearScript(titulo, mensaje, false);
+                            }
                         }
                         else
                         {
@@ -102,8 +125,7 @@ namespace AppWeb
                             StatusV = true;
                             titulo = "Las contraseñas no coinciden";
                             mensaje = "Las contraseñas ingresadas no coinciden, intente nuevamente";
-                            script = string.Format("crearAlerta({0},'{1}','{2}');", false.ToString().ToLower(), titulo, mensaje);
-                            ScriptManager.RegisterStartupScript(this, GetType(), "crearAlerta", script, true);
+                            crearScript(titulo, mensaje, false);
                         }
                     }
                     else
@@ -112,8 +134,7 @@ namespace AppWeb
                         StatusV = true;
                         titulo = "Contraseña inválida";
                         mensaje = "La contraseña ingresada no es válida o está vacía, ingrese una contraseña de 6 a 20 dígitos, con al menos una mayúscula, una minúscula, un símbolo y un número";
-                        script = string.Format("crearAlerta({0},'{1}','{2}');", false.ToString().ToLower(), titulo, mensaje);
-                        ScriptManager.RegisterStartupScript(this, GetType(), "crearAlerta", script, true);
+                        crearScript(titulo, mensaje, false);
                     }
                 }
             }

@@ -378,7 +378,7 @@ namespace AppWeb
             }
         }
 
-        protected void btnCacelarValidacion_Click(object sender, EventArgs e)
+        protected void btnCancelarValidacion_Click(object sender, EventArgs e)
         {
             try
             {

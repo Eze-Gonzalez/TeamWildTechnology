@@ -23,7 +23,7 @@
                 <%if (!Validaciones.Validar.sesion(Session["usuario"]))
                     {%>
                 <a href="Login.aspx" class="btnNext"><span class="btnText">INICIAR SESIÓN</span><span class="bgHover"></span></a>
-                <a href="Login.aspx" class="btnNext"><span class="btnText">REGISTRARSE</span><span class="bgHover"></span></a>
+                <a href="Register.aspx" class="btnNext"><span class="btnText">REGISTRARSE</span><span class="bgHover"></span></a>
                 <%}
                     else
                     {  %>

@@ -6,55 +6,53 @@
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>
             <asp:Panel ID="panelLogin" runat="server">
-                <section>
-                    <div class="modalLogin">
-                        <div class="userData">
-                            <h2>Iniciar Sesión</h2>
-                            <asp:Panel ID="panelEmail" runat="server">
-                                <div class="input-box">
-                                    <label>Email/Nombre de usuario</label>
-                                    <asp:TextBox ID="txtEmail" CssClass="input" runat="server"></asp:TextBox>
-                                </div>
-                            </asp:Panel>
-                            <%if (Validaciones.Validar.usuarioRegistrado(txtEmail.Text))
-                                {  %>
-                            <asp:Panel ID="panelUsuario" runat="server">
-                                <div class="panelUsuario">
-                                    <asp:Label ID="lblPerfil" runat="server" Text="Nombre"></asp:Label>
-                                    <label>¿No es su cuenta?</label>
-                                    <asp:LinkButton ID="lnkOtro" runat="server" OnClick="lnkOtro_Click">Cambiar Cuenta</asp:LinkButton>
-                                </div>
-                            </asp:Panel>
+                <div class="modalLogin">
+                    <div class="userData">
+                        <h2>Iniciar Sesión</h2>
+                        <asp:Panel ID="panelEmail" runat="server">
                             <div class="input-box">
-                                <label>Contraseña</label>
-                                <div>
-                                    <asp:TextBox ID="txtPass" ClientIDMode="Static" TextMode="Password" CssClass="input" runat="server"></asp:TextBox>
-                                    <button id="mostrar" onclick="mostrarPass('txtPass', 'icono')" type="button" class="boton-mostrar"><i id="icono" class="fa fa-eye-slash"></i></button>
-                                </div>
+                                <label>Email/Nombre de usuario</label>
+                                <asp:TextBox ID="txtEmail" CssClass="input" runat="server"></asp:TextBox>
                             </div>
-                            <div class="forget">
-                                <asp:LinkButton ID="lnkForget" runat="server" OnClick="lnkForget_Click">Olvidé mi contraseña</asp:LinkButton>
+                        </asp:Panel>
+                        <%if (Validaciones.Validar.usuarioRegistrado(txtEmail.Text))
+                            {  %>
+                        <asp:Panel ID="panelUsuario" runat="server">
+                            <div class="panelUsuario">
+                                <asp:Label ID="lblPerfil" runat="server" Text="Nombre"></asp:Label>
+                                <label>¿No es su cuenta?</label>
+                                <asp:LinkButton ID="lnkOtro" runat="server" OnClick="lnkOtro_Click">Cambiar Cuenta</asp:LinkButton>
                             </div>
-                            <%}
-                            %>
-                            <div class="modal-footer">
-                                <%if (Status)
-                                    {  %>
-                                <asp:LinkButton ID="btnLogin" CssClass="btnNext" runat="server" OnClick="btnLogin_Click"><span class="btnText">INCIAR SESIÓN</span><span class="bgHover"></span></asp:LinkButton>
-                                <%}
-                                    else
-                                    { %>
-                                <asp:LinkButton ID="btnSiguiente" CssClass="btnNext" runat="server" OnClick="txtEmail_TextChanged"><span class="btnText">SIGUIENTE</span><span class="bgHover"></span></asp:LinkButton>
-                                <%} %>
-                                <a href="Default.aspx" class="btnCancelar"><span class="btnText">CANCELAR</span><span class="bgHover"></span></a>
-                            </div>
-                            <div class="register">
-                                <p>¿No tiene cuenta?</p>
-                                <a href="Register.aspx" class="ms-2">Registrese aquí</a>
+                        </asp:Panel>
+                        <div class="input-box">
+                            <label>Contraseña</label>
+                            <div>
+                                <asp:TextBox ID="txtPass" ClientIDMode="Static" TextMode="Password" CssClass="input" runat="server"></asp:TextBox>
+                                <button id="mostrar" onclick="mostrarPass('txtPass', 'icono')" type="button" class="boton-mostrar"><i id="icono" class="fa fa-eye-slash"></i></button>
                             </div>
                         </div>
+                        <div class="forget">
+                            <asp:LinkButton ID="lnkForget" runat="server" OnClick="lnkForget_Click">Olvidé mi contraseña</asp:LinkButton>
+                        </div>
+                        <%}
+                        %>
+                        <div class="modal-footer">
+                            <%if (Status)
+                                {  %>
+                            <asp:LinkButton ID="btnLogin" CssClass="btnNext" runat="server" OnClick="btnLogin_Click"><span class="btnText">INCIAR SESIÓN</span><span class="bgHover"></span></asp:LinkButton>
+                            <%}
+                                else
+                                { %>
+                            <asp:LinkButton ID="btnSiguiente" CssClass="btnNext" runat="server" OnClick="txtEmail_TextChanged"><span class="btnText">SIGUIENTE</span><span class="bgHover"></span></asp:LinkButton>
+                            <%} %>
+                            <a href="Default.aspx" class="btnCancelar"><span class="btnText">CANCELAR</span><span class="bgHover"></span></a>
+                        </div>
+                        <div class="register">
+                            <p>¿No tiene cuenta?</p>
+                            <a href="Register.aspx" class="ms-2">Registrese aquí</a>
+                        </div>
                     </div>
-                </section>
+                </div>
             </asp:Panel>
             <asp:Panel ID="panelForget" runat="server" Visible="false">
                 <section>
@@ -126,7 +124,7 @@
                 <ContentTemplate>
                     <div class="modal-footer h10">
                         <asp:LinkButton ID="btnValidar" CssClass="btnNext" runat="server" OnClick="btnValidar_Click"><span class="btnText">VALIDAR</span><span class="bgHover"></span></asp:LinkButton>
-                        <asp:LinkButton ID="btnCacelarValidacion" CssClass="btnCancelar" runat="server" OnClick="btnCacelarValidacion_Click"><span class="btnText">CANCELAR</span><span class="bgHover"></span></asp:LinkButton>
+                        <asp:LinkButton ID="btnCacelarValidacion" CssClass="btnCancelar" runat="server" OnClick="btnCancelarValidacion_Click"><span class="btnText">CANCELAR</span><span class="bgHover"></span></asp:LinkButton>
                     </div>
                 </ContentTemplate>
             </asp:UpdatePanel>

@@ -136,16 +136,13 @@ namespace Datos
             try
             {
                 datos.consultaSP("ActualizarDatos");
-                //@nombre varchar(50),
-                //@apellido varchar(50),
-                //@email varchar(100),
-                //@pass varchar(50),
-                //@idImagen int,
-                //@id int
                 datos.parametros("@nombre", usuario.Nombre);
                 datos.parametros("@apellido", usuario.Apellido);
                 datos.parametros("@email", usuario.Email);
                 datos.parametros("@pass", usuario.Pass);
+                datos.parametros("@username", usuario.UserName);
+                datos.parametros("@twofactor", usuario.TwoFactor);
+                datos.parametros("@twofactortype", usuario.TwoFactorType);
                 datos.parametros("@id", usuario.Id);
                 datos.ejecutar();
             }

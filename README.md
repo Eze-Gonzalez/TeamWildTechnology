@@ -40,3 +40,12 @@ _______________________________________________________
 <p>Corregidos varios fallos en la página de Login.</p>
 <p>Creación de la página de registro</p>
 <p>Establecido el diseño de la página de error * Pendiente de terminar</p>
+
+_______________________________________________________
+
+<h4><b>V0.002</b></h4>
+<p>Corregidos otros fallos en la página de Login.</p>
+<p>Creada la logica de la página de registro</p>
+<p>Creada la página de contacto con su respectiva lógica</p>
+<p>Creada la página de edición de perfil con su respectivas secciones</p>
+<p>Creada parcialmente la lógica de edición de perfil</p> 

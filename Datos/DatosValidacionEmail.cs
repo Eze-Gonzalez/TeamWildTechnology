@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Datos
 {
-    public class DatosValidacionEmail
+    public static class DatosValidacionEmail
     {
         public static void cargarCodigo(string email, string codigo)
         {

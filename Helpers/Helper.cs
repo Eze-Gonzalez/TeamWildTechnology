@@ -96,6 +96,19 @@ namespace Helpers
                 throw;
             }
         }
+
+        public static string cargarCuerpo(string titulo, string email, string mensaje)
+        {
+            try
+            {
+                return "<style>\r\n  @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@100;200;500;600&display=swap');\r\n  *{\r\n    font-family: Kanit;\r\n    letter-spacing: 2px;\r\n    color: #fff !important;\r\n  }\r\n   a{\r\n    color: #fff}\r\n</style>\r\n<div style=\"background: #000000d1; height: 500px; width: 50%; color: #fff !important; padding: 20px 0px;\">\r\n  <h2 style=\"text-align:center\">" + titulo + "</h2>\r\n  <p style=\"margin-left: 20px; margin-bottom: 40px;\">Email: " + email + "</p>\r\n  <pre style=\"padding: 20px;\">" + mensaje + "</pre>\r\n</div>";
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public static bool cargarDatos(Usuario usuario, string nombre, string apellido, string fecha, ref string errorNombre, ref string errorApellido, ref string errorFecha, ref string titulo, ref string mensaje, ref bool errorNombreVisible, ref bool errorApellidoVisible, ref bool errorFechaVisible)
         {
             DatosUsuario datos = new DatosUsuario();

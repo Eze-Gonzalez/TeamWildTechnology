@@ -15,8 +15,6 @@ namespace AppWeb
             try
             {
                 lblCopy.Text = "Team Wild Technology® " + DateTime.Now.ToString("yyyy");
-                if(Page is Login || Page is Register)
-                    menuButton.Disabled = true;
             }
             catch (Exception ex)
             {

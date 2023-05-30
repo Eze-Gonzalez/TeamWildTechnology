@@ -7,8 +7,10 @@ menuButton.addEventListener('click', (event) => {
         menuMobile.classList.add('cerrarMenu');
         menuMobile.addEventListener('animationend', () => {
             menuMobile.classList.remove('menu-visible', 'cerrarMenu');
+            menuMobile.classList.add('displaynone');
         }, { once: true });
     } else {
+        menuMobile.classList.remove('displaynone');
         menuMobile.classList.add('menu-visible');
     }
 });
@@ -27,5 +29,8 @@ function mostrarPass(txt, ico) {
     }
 }
 
-
-
+function limpiarCampos() {
+    document.getElementById('txtUsuario').value = '';
+    document.getElementById('txtEmail').value = '';
+    document.getElementById('txtMensaje').value = '';
+}

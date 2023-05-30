@@ -11,7 +11,16 @@ namespace AppWeb
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+			try
+			{
+                
+			}
+			catch (Exception ex)
+			{
+                Session["ErrorCode"] = "Hubo un problema al cargar la página";
+                Session["Error"] = ex.Message;
+                Response.Redirect("Default.aspx", false);
+			}
         }
     }
 }
