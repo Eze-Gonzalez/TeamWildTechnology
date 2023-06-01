@@ -10,7 +10,6 @@ namespace ServicioEmail
 {
     public class Email
     {
-        //rgjktibmtcvonbhr
         private SmtpClient servidor;
         private MailMessage email;
 

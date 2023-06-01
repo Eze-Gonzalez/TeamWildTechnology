@@ -32,15 +32,24 @@ namespace AppWeb
                             break;
                         case 2:
                             lblEdit.Text = "Nombre de usuario";
+                            text.InnerHtml = "GUARDAR";
                             break;
                         case 3:
                             lblEdit.Text = "Contraseña";
+                            text.InnerHtml = "GUARDAR";
                             break;
                         case 4:
                             lblEdit.Text = "Datos personales";
+                            text.InnerHtml = "GUARDAR";
                             break;
                         case 5:
                             lblEdit.Text = "Verificación en dos pasos";
+                            if (Session["usuario"] != null && !((Usuario)Session["usuario"]).TwoFactor)
+                            {
+                                chkOnOff.Checked = true;
+                                lblOff.Visible = true;
+                                text.InnerHtml = "GUARDAR";
+                            }
                             break;
                         default:
                             Session["ErrorCode"] = "Hubo un problema al cargar la página";
@@ -160,11 +169,11 @@ namespace AppWeb
                     case 3:
                         if (Validar.campoPass(txtPassActual.Text))
                         {
-                            if(txtPassActual.Text == ((Usuario)Session["usuario"]).Pass)
+                            if (txtPassActual.Text == ((Usuario)Session["usuario"]).Pass)
                             {
                                 if (Validar.campoPass(txtPass.Text))
                                 {
-                                    if(txtPass.Text == txtRepetir.Text)
+                                    if (txtPass.Text == txtRepetir.Text)
                                     {
                                         usuario.Pass = txtPass.Text;
                                         titulo = "Contraseña actualizada";
@@ -179,9 +188,21 @@ namespace AppWeb
                             }
                         }
                         break;
-                    case 4:
+                    case 4: //datos personales
                         break;
-                    case 5:
+                    case 5: //verificacion 2 pasos
+                        if (chkEmail.Checked)
+                        {
+                            Email servicio = new Email();
+                            DatosValidacionEmail.eliminarCodigo(((Usuario)Session["usuario"]).Email);
+                            string codigo = Helper.generarCodigo();
+                            DatosValidacionEmail.cargarCodigo(((Usuario)Session["usuario"]).Email, codigo);
+                            ajxValidacion.Show();
+                        }
+                        if (chkApp.Checked)
+                        {
+
+                        }
                         break;
                 }
             }
@@ -204,8 +225,16 @@ namespace AppWeb
                     usuario.Email = txtNuevoEmail.Text;
                     DatosUsuario datos = new DatosUsuario();
                     datos.actualizarDatos(usuario);
-                    titulo = "Email actualizado";
-                    mensaje = "El email ha sido actualizado exitosamente!";
+                    if (Request.QueryString["edit"] == "1")
+                    {
+                        titulo = "Email actualizado";
+                        mensaje = "El email ha sido actualizado exitosamente!";
+                    }
+                    else
+                    {
+                        titulo = "Verificación actualizada";
+                        mensaje = "La verificacion de dos pasos mediante el email registrado, ha sido actualizada correctamente";
+                    }
                     status = true;
                     crearAlerta(titulo, mensaje, status);
                 }
@@ -220,6 +249,28 @@ namespace AppWeb
                 Session["ErrorCode"] = "Hubo un problema al cargar la página";
                 Session["Error"] = ex.Message;
                 Response.Redirect("Error.aspx", false);
+            }
+        }
+
+        protected void chkOnOff_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkOnOff.Checked)
+            {
+                lblOff.Visible = true;
+                lblOff.CssClass += " show";
+                lblOn.Visible = false;
+                if (lblOn.CssClass.Contains("show"))
+                    lblOn.CssClass = "lblOn";
+                text.InnerHtml = "SIGUIENTE";
+            }
+            else
+            {
+                lblOff.Visible = false;
+                lblOn.Visible = true;
+                lblOn.CssClass += " show";
+                if (lblOff.CssClass.Contains("show"))
+                    lblOff.CssClass = "lblOff";
+                text.InnerHtml = "GUARDAR";
             }
         }
 

@@ -1,5 +1,8 @@
 ﻿const menuButton = document.querySelector('.menu-button');
 const menuMobile = document.getElementById('menu-mobile');
+const chkBox = document.getElementById('chkOnOff');
+const lblOn = document.getElementById('lblOn');
+const lblOff = document.getElementById('lblOff');
 
 menuButton.addEventListener('click', (event) => {
     event.preventDefault();
@@ -33,4 +36,8 @@ function limpiarCampos() {
     document.getElementById('txtUsuario').value = '';
     document.getElementById('txtEmail').value = '';
     document.getElementById('txtMensaje').value = '';
+}
+
+if (chkBox.checked) {
+
 }

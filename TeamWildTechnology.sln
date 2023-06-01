@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServicioEmail", "ServicioEm
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helpers", "Helpers\Helpers.csproj", "{C8ED945D-C94C-43E0-8937-9DAD25F7C34B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Verificacion", "Verificacion\Verificacion.csproj", "{4A1D2027-8114-4415-AF46-7288D4C522ED}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{C8ED945D-C94C-43E0-8937-9DAD25F7C34B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C8ED945D-C94C-43E0-8937-9DAD25F7C34B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C8ED945D-C94C-43E0-8937-9DAD25F7C34B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A1D2027-8114-4415-AF46-7288D4C522ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A1D2027-8114-4415-AF46-7288D4C522ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A1D2027-8114-4415-AF46-7288D4C522ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A1D2027-8114-4415-AF46-7288D4C522ED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

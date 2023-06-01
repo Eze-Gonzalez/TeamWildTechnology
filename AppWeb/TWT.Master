@@ -12,6 +12,7 @@
     <link href="Contenido/CSS/Modal.css" rel="stylesheet" />
     <link href="Contenido/CSS/Iconos.css" rel="stylesheet" />
     <script src="https://kit.fontawesome.com/ddd3cc0419.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>

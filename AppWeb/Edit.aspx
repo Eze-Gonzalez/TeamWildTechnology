@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+    <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
         <ContentTemplate>
             <div class="profile">
                 <h3>Editar
@@ -55,23 +55,51 @@
                 </div>
                 <%break;%>
                 <%case "5":%>
-                <label>Activar verificación de dos pasos</label>
-                <asp:CheckBox ID="chkVerificacion" runat="server" AutoPostBack="true" />
-                <%if (chkVerificacion.Checked)
-                    { %>
-                <label>Seleccione el tipo de verificación en dos pasos que desea activar</label>
-                <label>Email</label>
-                <asp:CheckBox ID="chkEmail" runat="server" AutoPostBack="true" />
-                <label>Aplicación</label>
-                <asp:CheckBox ID="chkApp" runat="server" AutoPostBack="true" />
-                <%}  %>
-                <%break;%>
-                <%}  %>
-                <div class="modal-footer vw-100 h-8 mt-10">
-                    <asp:LinkButton ID="lnkSiguiente" runat="server" CssClass="btnNext buttons" OnClick="lnkSiguiente_Click"><span class="btnText">SIGUIENTE</span><span class="bgHover"></span></asp:LinkButton>
-                    <a href="Profile.aspx" class="btnCancelar buttons"><span class="btnText">CANCELAR</span><span class="bgHover"></span></a>
+                <label>Verificación de dos pasos</label>
+                <div>
+                    <asp:Label ID="lblOn" runat="server" Text="DESACTIVADO" CssClass="lblOn"></asp:Label>
+                    <label class="switch">
+                        <asp:CheckBox ID="chkOnOff" runat="server" AutoPostBack="true" ClientIDMode="Static" OnCheckedChanged="chkOnOff_CheckedChanged" />
+                        <span class="slider round"></span>
+                    </label>
+                    <asp:Label ID="lblOff" runat="server" Text="ACTIVADO" Visible="false" CssClass="lblOff"></asp:Label>
                 </div>
-            </div>
+                <%if (chkOnOff.Checked)
+                    { %>
+                <div class="vw-100 border-top show center-row">
+                    <div class="center-col">
+                        <div class="mb-3 mt-10">
+                            <asp:UpdatePanel ID="UpdatePanel4" runat="server">
+                                <ContentTemplate>
+                                    <label class="chkbox">
+                                        <asp:CheckBox ID="chkEmail" runat="server" AutoPostBack="true" />
+                                        <span class="chkspan"></span>
+                                    </label>
+                                    <label>Email</label>
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
+                        </div>
+                        <div>
+                            <asp:UpdatePanel ID="UpdatePanel5" runat="server">
+                                <ContentTemplate>
+                                    <label class="chkbox">
+                                        <asp:CheckBox ID="chkApp" runat="server" AutoPostBack="true" />
+                                        <span class="chkspan"></span>
+                                    </label>
+                                    <label>App</label>
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
+    </div>
+                    </div>
+                </div>
+                <%}  %>
+    <%break;%>
+    <%}  %>
+    <div class="modal-footer vw-100 h-8 mt-10">
+        <asp:LinkButton ID="lnkSiguiente" runat="server" CssClass="btnNext buttons" OnClick="lnkSiguiente_Click"><span id="text" class="btnText" runat="server">SIGUIENTE</span><span class="bgHover"></span></asp:LinkButton>
+        <a href="Profile.aspx" class="btnCancelar buttons"><span class="btnText">CANCELAR</span><span class="bgHover"></span></a>
+    </div>
+    </div>
         </ContentTemplate>
     </asp:UpdatePanel>
     <asp:Panel ID="modalValidacion" CssClass="modalValidacion" runat="server">
